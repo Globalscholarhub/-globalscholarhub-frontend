@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="text-3xl font-bold p-10">
+    <div className="text-3xl font-bold text-blue-600 p-10 bg-gray-100">
       Ultra Modern Homepage
     </div>
   );
