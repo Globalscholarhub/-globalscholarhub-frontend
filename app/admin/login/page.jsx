@@ -1,64 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { signIn } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
-export default function AdminLogin() {
-  const router = useRouter();
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [error, setError] = useState("");
 
   async function handleLogin(e) {
     e.preventDefault();
-    setErrorMsg("");
+    setError("");
 
-    const { error } = await signIn(email, password);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     if (error) {
-      setErrorMsg(error.message);
+      setError(error.message);
       return;
     }
 
-    router.push("/admin/dashboard");
+    window.location.href = "/admin/dashboard";
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form
-        onSubmit={handleLogin}
-        className="p-6 border rounded-lg shadow-md w-80 bg-white"
-      >
-        <h2 className="text-xl mb-4 font-bold text-center">Admin Login</h2>
+    <div style={{ padding: "40px" }}>
+      <h1 className="text-2xl font-bold mb-4">Admin Login</h1>
 
+      <form onSubmit={handleLogin} className="flex flex-col gap-4 max-w-sm">
         <input
           type="email"
-          className="border p-2 w-full mb-3"
           placeholder="Admin Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="border p-2 rounded"
           required
         />
 
         <input
           type="password"
-          className="border p-2 w-full mb-3"
-          placeholder="Password"
+          placeholder="Admin Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="border p-2 rounded"
           required
         />
 
-        {errorMsg && (
-          <p className="text-red-500 text-sm mb-3">{errorMsg}</p>
-        )}
+        {error && <p className="text-red-600">{error}</p>}
 
-        <button
-          type="submit"
-          className="bg-black text-white p-2 w-full rounded"
-        >
-          Sign In
+        <button className="bg-black text-white p-2 rounded">
+          Login
         </button>
       </form>
     </div>
