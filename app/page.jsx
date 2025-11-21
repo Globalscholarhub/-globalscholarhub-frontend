@@ -1,7 +1,9 @@
 export default function Home() {
   return (
-    <div className="text-3xl font-bold text-blue-600 p-10 bg-gray-100">
-      Ultra Modern Homepage
-    </div>
+    <main className="min-h-screen flex items-center justify-center bg-white">
+      <h1 className="text-4xl font-bold text-black">
+        Ultra Modern Homepage
+      </h1>
+    </main>
   );
 }
