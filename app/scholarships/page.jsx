@@ -1,0 +1,1 @@
+// Scholarships listing placeholder
