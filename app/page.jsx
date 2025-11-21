@@ -1,1 +1,1 @@
-export default function Home(){return <h1>GlobalScholarHub Home</h1>;}
+export default function Home(){return <div className='text-3xl font-bold'>Ultra Modern Homepage</div>;}

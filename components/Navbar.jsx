@@ -1,1 +1,1 @@
-export default function Navbar(){return <nav>Navbar</nav>;}
+export default function Navbar(){return <nav className='p-4 bg-white dark:bg-slate-800 shadow'>Navbar</nav>;}
